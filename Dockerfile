@@ -117,4 +117,4 @@ RUN $CONDA_DIR/envs/python2/bin/python \
     kernelspec install-self
 EXPOSE 8888
 # Switch back to jovyan to avoid accidental container runs as root
-USER jovyan
+#USER jovyan

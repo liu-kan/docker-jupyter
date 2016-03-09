@@ -4,7 +4,7 @@ build:
 	docker build --rm -t jupyter-k .
 
 run: 
-	docker run -d --name jupyterServ -p 8888:8888 jupyter-k
+	docker run -d --name jupyterServ -p 8888:8888 -p 222:22 jupyter-kk
 
 kill:
 	-docker kill jupyterServ

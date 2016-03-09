@@ -20,19 +20,18 @@ RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
     fonts-dejavu \
     gfortran \
-    openssh-client \
-    gcc && apt-get clean
-
+    openssh-server \
+    gcc julia \
+    libnettle4 libav-tools && \
+    apt-get clean
 # Julia dependencies
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    julia \
-    libnettle4 && apt-get clean
+#RUN apt-get install -y --no-install-recommends \
+#    julia \
+#    libnettle4 
 
 # libav-tools for matplotlib anim
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libav-tools && \
-    apt-get clean
+#RUN apt-get install -y --no-install-recommends libav-tools && \
+#    apt-get clean
 
 USER jovyan
 
@@ -109,7 +108,8 @@ RUN julia -e 'Pkg.add("IJulia")' && \
 RUN julia -e 'Pkg.add("Gadfly")' && julia -e 'Pkg.add("RDatasets")'
 
 USER root
-
+ADD config/sshd_config /etc/ssh/sshd_config
+RUN systemctl enable ssh && service ssh restart
 # Install Python 2 kernel spec globally to avoid permission problems when NB_UID
 # switching at runtime.
 RUN $CONDA_DIR/envs/python2/bin/python \
@@ -117,4 +117,8 @@ RUN $CONDA_DIR/envs/python2/bin/python \
     kernelspec install-self
 EXPOSE 8888
 # Switch back to jovyan to avoid accidental container runs as root
-#USER jovyan
+USER jovyan
+ADD config/ipython_config.py /home/jovyan/.ipython/profile_default/ipython_config.py
+ADD config/ipython_kernel_config.py /home/jovyan/.ipython/profile_default/ipython_kernel_config.py
+
+USER root

@@ -1,0 +1,1 @@
+c.InteractiveShellApp.matplotlib = 'inline'

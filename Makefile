@@ -3,8 +3,10 @@
 build:
 	docker build --rm -t jupyter-k .
 
+buildNote:
+	docker build -f DockerfileN --rm -t jupyter-kn .
 run: 
-	docker run -d --name jupyterServ -p 8888:8888 -p 222:22 jupyter-kk
+	docker run -d --name jupyterServ -p 8888:8888 -p 222:22 jupyter-kn
 
 kill:
 	-docker kill jupyterServ

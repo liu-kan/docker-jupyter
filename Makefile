@@ -1,12 +1,12 @@
 .PHONY: build run kill enter push pull
 
 build:
-	docker build --rm -t jupyter-k .
+	docker build --rm -t jupyter-kn .
 
-buildNote:
-	docker build -f DockerfileN --rm -t jupyter-kn .
+buildNoteR:
+	docker build -f DockerfileNR --rm -t jupyter-knr .
 run: 
-	docker run -d --name jupyterServ -p 8888:8888 -p 222:22 jupyter-kn
+	docker run -d --name jupyterServ -p 8888:8888 -p 222:22 jupyter-knr
 
 kill:
 	-docker kill jupyterServ

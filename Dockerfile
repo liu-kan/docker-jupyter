@@ -8,12 +8,12 @@ MAINTAINER Liu K <liukan@126.com>
 USER root
 
 # R pre-requisites
-RUN echo "deb http://mirrors.ustc.edu.cn/debian jessie main contrib non-free\n\
-deb-src http://mirrors.ustc.edu.cn/debian jessie main contrib non-free\n\
-deb http://mirrors.ustc.edu.cn/debian jessie-proposed-updates main contrib non-free\n\
-deb-src http://mirrors.ustc.edu.cn/debian jessie-proposed-updates main contrib non-free\n\
-deb http://mirrors.ustc.edu.cn/debian jessie-updates main contrib non-free\n\
-deb-src http://mirrors.ustc.edu.cn/debian jessie-updates main contrib non-free\n\
+RUN echo "deb http:// ftp.jp.debian.org/debian jessie main contrib non-free\n\
+deb-src http:// ftp.jp.debian.org/debian jessie main contrib non-free\n\
+deb http:// ftp.jp.debian.org/debian jessie-proposed-updates main contrib non-free\n\
+deb-src http:// ftp.jp.debian.org/debian jessie-proposed-updates main contrib non-free\n\
+deb http:// ftp.jp.debian.org/debian jessie-updates main contrib non-free\n\
+deb-src http:// ftp.jp.debian.org/debian jessie-updates main contrib non-free\n\
 deb http://mirrors.ustc.edu.cn/debian-security jessie/updates main\n\
 " > /etc/apt/sources.list
 

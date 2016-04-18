@@ -1,19 +1,19 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
-FROM jupyter/minimal-notebook
+FROM jupyter/datascience-notebook
 
 MAINTAINER Liu K <liukan@126.com>
 
 USER root
 
 # R pre-requisites
-RUN echo "deb http:// ftp.jp.debian.org/debian jessie main contrib non-free\n\
-deb-src http:// ftp.jp.debian.org/debian jessie main contrib non-free\n\
-deb http:// ftp.jp.debian.org/debian jessie-proposed-updates main contrib non-free\n\
-deb-src http:// ftp.jp.debian.org/debian jessie-proposed-updates main contrib non-free\n\
-deb http:// ftp.jp.debian.org/debian jessie-updates main contrib non-free\n\
-deb-src http:// ftp.jp.debian.org/debian jessie-updates main contrib non-free\n\
+RUN echo "deb http://mirrors.aliyun.com/debian jessie main contrib non-free\n\
+deb-src http://mirrors.aliyun.com/debian jessie main contrib non-free\n\
+deb http://mirrors.aliyun.com/debian jessie-proposed-updates main contrib non-free\n\
+deb-src http://mirrors.aliyun.com/debian jessie-proposed-updates main contrib non-free\n\
+deb http://mirrors.aliyun.com/debian jessie-updates main contrib non-free\n\
+deb-src http://mirrors.aliyun.com/debian jessie-updates main contrib non-free\n\
 deb http://mirrors.ustc.edu.cn/debian-security jessie/updates main\n\
 " > /etc/apt/sources.list
 
@@ -24,64 +24,34 @@ ENV LANG zh_CN.UTF-8
 ENV LANGUAGE zh_CN.UTF-8
 
 RUN export LANG=zh_CN.UTF-8 && export LANGUAGE=zh_CN.UTF-8 && dpkg-reconfigure locales
+# texlive dependencies
 RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
-    fonts-dejavu \
-    gfortran \
     openssh-server \
-    gcc julia \
-    libnettle4 libav-tools inkscape && \
-    apt-get clean
-# texlive dependencies
-RUN apt-get install -y texlive-lang-chinese texlive-lang-cjk texlive-luatex texlive-math-extra texlive-metapost  texlive-plain-extra texlive-science texlive-xetex texlive-bibtex-extra
-# Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
+    libav-tools inkscape \
+    texlive-lang-chinese texlive-lang-cjk texlive-luatex texlive-math-extra texlive-metapost  texlive-plain-extra texlive-science texlive-xetex texlive-bibtex-extra \
+    latex-cjk-common fonts-lmodern && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+#ADD config/ipython_config.py /home/jovyan/.ipython/profile_default/ipython_config.py
+ADD config/01-font.py /home/jovyan/.ipython/profile_default/startup/01-font.py
+
+ADD config/jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
+ADD config/article.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/article.tplx
+ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
+ADD config/ipython_kernel_config.py /home/jovyan/.ipython/profile_default/ipython_kernel_config.py
+
+RUN  chown -R jovyan /home/jovyan/.ipython ; chgrp -R users /home/jovyan/.ipython; fc-cache -fsv
 
 USER jovyan
+ADD fonts/* /home/jovyan/.fonts/
+RUN fc-cache -fsv; fc-list
 
-#RUN conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/' && \
-#    conda config --add channels 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r/' && \
-#	conda config --set show_channel_urls yes
-# Install Python 3 packages
-RUN conda install --yes \
-    'ipywidgets=4.1*' \
-    'pandas=0.17*' \
-    'matplotlib=1.5*' \
-    'scipy=0.17*' \
-    'seaborn=0.7*' \
-    'scikit-learn=0.17*' \
-    'scikit-image=0.11*' \
-    'sympy=0.7*' \
-    'cython=0.23*' \
-    'patsy=0.4*' \
-    'statsmodels=0.6*' \
-    'cloudpickle=0.1*' \
-    'dill=0.2*' \
-    'numba=0.23*' \
-    'bokeh=0.11*' \
-    'h5py=2.5*' \
-    && conda clean -tipsy
-
-# Install Python 2 packages
-RUN conda create --yes -p $CONDA_DIR/envs/python2 python=2.7 \
-    'ipython=4.1*' \
-    'ipywidgets=4.1*' \
-    'pandas=0.17*' \
-    'matplotlib=1.5*' \
-    'scipy=0.17*' \
-    'seaborn=0.7*' \
-    'scikit-learn=0.17*' \
-    'scikit-image=0.11*' \
-    'sympy=0.7*' \
-    'cython=0.23*' \
-    'patsy=0.4*' \
-    'statsmodels=0.6*' \
-    'cloudpickle=0.1*' \
-    'dill=0.2*' \
-    'numba=0.23*' \
-    'bokeh=0.11*' \
-    'h5py=2.5*' \
-    'pyzmq' \
-    && conda clean -tipsy
-
-
+    
+USER root
+ADD logo.png /opt/conda/envs/python2/lib/python2.7/site-packages/notebook/static/base/images/logo.png
+ADD logo.png /opt/conda/lib/python3.5/site-packages/notebook/static/base/images/logo.png
+ADD logo.png /opt/conda/pkgs/notebook-4.1.0-py35_0/lib/python3.5/site-packages/notebook/static/base/images/logo.png
+ADD logo.png /opt/conda/pkgs/notebook-4.1.0-py27_0/lib/python2.7/site-packages/notebook/static/base/images/logo.png
+ADD logo.png /opt/conda/logo.png

@@ -1,6 +1,6 @@
 # Chinese version of jupyter/datascience-notebook
 
-## Addition fonts 
+## Additional fonts 
 can be downloaded at http://cdimage.debian.org/mirror/CTAN/fonts/fandol/
 
 ## Minimal Jupyter Notebook Stack

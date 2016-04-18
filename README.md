@@ -1,8 +1,11 @@
-![docker pulls](https://img.shields.io/docker/pulls/jupyter/minimal-notebook.svg) ![docker stars](https://img.shields.io/docker/stars/jupyter/minimal-notebook.svg)
+# Chinese version of jupyter/datascience-notebook
 
-# Minimal Jupyter Notebook Stack
+## Addition fonts 
+can be downloaded at http://cdimage.debian.org/mirror/CTAN/fonts/fandol/
 
-## What it Gives You
+## Minimal Jupyter Notebook Stack
+
+### What it Gives You
 
 * Jupyter Notebook 4.1.x
 * Conda Python 3.x
@@ -12,7 +15,7 @@
 * A [start-singleuser.sh](../minimal-notebook/start-singleuser.sh) script for use as an alternate command that runs a single-user instance of the Notebook server, as required by [JupyterHub](#JupyterHub)
 * Options for HTTPS, password auth, and passwordless `sudo`
 
-## Basic Use
+### Basic Use
 
 The following command starts a container with the Notebook server listening for HTTP connections on port 8888 without authentication configured.
 
@@ -20,7 +23,7 @@ The following command starts a container with the Notebook server listening for 
 docker run -d -p 8888:8888 jupyter/minimal-notebook
 ```
 
-## Notebook Options
+### Notebook Options
 
 You can pass [Jupyter command line options](http://jupyter.readthedocs.org/en/latest/config.html#command-line-arguments) through the [`start-notebook.sh` command](https://github.com/jupyter/docker-stacks/blob/master/minimal-notebook/start-notebook.sh#L15) when launching the container. For example, to set the base URL of the notebook server you might do the following:
 
@@ -30,7 +33,7 @@ docker run -d -p 8888:8888 jupyter/minimal-notebook start-notebook.sh --Notebook
 
 You can sidestep the `start-notebook.sh` script entirely by specifying a command other than `start-notebook.sh`. If you do, the `NB_UID` and `GRANT_SUDO` features documented below will not work. See the Docker Options section for details.
 
-## Docker Options
+### Docker Options
 
 You may customize the execution of the Docker container and the Notebook server it contains with the following optional arguments.
 
@@ -41,12 +44,12 @@ You may customize the execution of the Docker container and the Notebook server 
 * `-v /some/host/folder/for/work:/home/jovyan/work` - Host mounts the default working directory on the host to preserve work even when the container is destroyed and recreated (e.g., during an upgrade).
 * `-v /some/host/folder/for/server.pem:/home/jovyan/.local/share/jupyter/notebook.pem` - Mounts a SSL certificate plus key for `USE_HTTPS`. Useful if you have a real certificate for the domain under which you are running the Notebook server.
 
-## Conda Environment
+### Conda Environment
 
 The default Python 3.x [Conda environment](http://conda.pydata.org/docs/using/envs.html) resides in `/opt/conda`. The commands `ipython`, `python`, `pip`, `easy_install`, and `conda` (among others) are available in this environment.
 
 
-## JupyterHub
+### JupyterHub
 
 [JupyterHub](https://jupyterhub.readthedocs.org) requires a single-user instance of the Jupyter Notebook server per user.   To use this stack with JupyterHub and [DockerSpawner](https://github.com/jupyter/dockerspawner), you must specify the container image name and override the default container run command in your `jupyterhub_config.py`:
 
@@ -61,9 +64,9 @@ c.DockerSpawner.extra_create_kwargs.update({
 ```
 
 
-# Jupyter Notebook Data Science Stack
+## Jupyter Notebook Data Science Stack
 
-## What it Gives You
+### What it Gives You
 
 * Jupyter Notebook 4.1.x
 * Conda Python 3.x and Python 2.7.x environments
@@ -75,7 +78,7 @@ c.DockerSpawner.extra_create_kwargs.update({
 * [tini](https://github.com/krallin/tini) as the container entrypoint and [start-notebook.sh](../minimal-notebook/start-notebook.sh) as the default command
 * Options for HTTPS, password auth, and passwordless `sudo`
 
-## Basic Use
+### Basic Use
 
 The following command starts a container with the Notebook server listening for HTTP connections on port 8888 without authentication configured.
 
@@ -83,7 +86,7 @@ The following command starts a container with the Notebook server listening for 
 docker run -d -p 8888:8888 jupyter/datascience-notebook
 ```
 
-## Notebook Options
+### Notebook Options
 
 You can pass [Jupyter command line options](http://jupyter.readthedocs.org/en/latest/config.html#command-line-arguments) through the [`start-notebook.sh` command](https://github.com/jupyter/docker-stacks/blob/master/minimal-notebook/start-notebook.sh#L15) when launching the container. For example, to set the base URL of the notebook server you might do the following:
 
@@ -93,7 +96,7 @@ docker run -d -p 8888:8888 jupyter/datascience-notebook start-notebook.sh --Note
 
 You can sidestep the `start-notebook.sh` script entirely by specifying a command other than `start-notebook.sh`. If you do, the `NB_USER` and `GRANT_SUDO` features documented below will not work. See the Docker Options section for details.
 
-## Docker Options
+### Docker Options
 
 You may customize the execution of the Docker container and the Notebook server it contains with the following optional arguments.
 
@@ -104,7 +107,7 @@ You may customize the execution of the Docker container and the Notebook server 
 * `-v /some/host/folder/for/work:/home/jovyan/work` - Host mounts the default working directory on the host to preserve work even when the container is destroyed and recreated (e.g., during an upgrade).
 * `-v /some/host/folder/for/server.pem:/home/jovyan/.local/share/jupyter/notebook.pem` - Mounts a SSL certificate plus key for `USE_HTTPS`. Useful if you have a real certificate for the domain under which you are running the Notebook server.
 
-## Conda Environments
+### Conda Environments
 
 The default Python 3.x [Conda environment](http://conda.pydata.org/docs/using/envs.html) resides in `/opt/conda`. A second Python 2.x Conda environment exists in `/opt/conda/envs/python2`. You can [switch to the python2 environment](http://conda.pydata.org/docs/using/envs.html#change-environments-activate-deactivate) in a shell by entering the following:
 

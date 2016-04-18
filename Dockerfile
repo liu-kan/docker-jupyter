@@ -41,8 +41,9 @@ ADD config/jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_con
 ADD config/base.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/
 #ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
 ADD config/ipython_kernel_config.py /home/jovyan/.ipython/profile_default/ipython_kernel_config.py
+ADD fonts/* /home/jovyan/.fonts/
 
-RUN  chown -R jovyan /home/jovyan/.ipython ; chgrp -R users /home/jovyan/.ipython; fc-cache -fsv
+RUN  chown -R jovyan /home/jovyan/.ipython ; chgrp -R users /home/jovyan/.ipython; chown -R jovyan /home/jovyan/.fonts ; chgrp -R users /home/jovyan/.fonts; fc-cache -fsv
 
 USER jovyan
 #ADD fonts/* /home/jovyan/.fonts/

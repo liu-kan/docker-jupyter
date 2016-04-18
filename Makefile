@@ -1,7 +1,7 @@
 .PHONY: build run kill enter push pull
 
 build:
-	-docker rmi jupyter-kn
+	#-docker rmi jupyter-kn
 	docker build --rm -t jupyter-kn .
 
 run: 

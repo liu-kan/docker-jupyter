@@ -4,11 +4,6 @@ build:
 	-docker rmi jupyter-kn
 	docker build --rm -t jupyter-kn .
 
-buildNoteR:
-	docker build -f DockerfileNR --rm -t jupyter-knr .
-buildNoteCN:
-	-docker rmi jupyter-kncn
-	docker build -f DockerfileCN --rm -t jupyter-kncn .
 run: 
 	docker run -d --name jupyterServ -p 8000:8000 -p 8888:8888 -p 222:22 jupyter-kn
 rerun:

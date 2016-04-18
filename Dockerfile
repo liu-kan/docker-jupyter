@@ -30,7 +30,7 @@ RUN apt-get -y update && \
     openssh-server \
     libav-tools inkscape \
     texlive-lang-chinese texlive-lang-cjk texlive-luatex texlive-math-extra texlive-metapost  texlive-plain-extra texlive-science texlive-xetex texlive-bibtex-extra \
-    latex-cjk-common fonts-lmodern && \
+    latex-cjk-common fonts-lmodern fonts-wqy-microhei fonts-wqy-zenhei fonts-arphic-bkai00mp  fonts-arphic-gbsn00lp fonts-arphic-bsmi00lp fonts-arphic-ukai fonts-arphic-uming && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -38,14 +38,14 @@ RUN apt-get -y update && \
 ADD config/01-font.py /home/jovyan/.ipython/profile_default/startup/01-font.py
 
 ADD config/jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
-ADD config/article.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/article.tplx
-ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
+ADD config/base.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/
+#ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
 ADD config/ipython_kernel_config.py /home/jovyan/.ipython/profile_default/ipython_kernel_config.py
 
 RUN  chown -R jovyan /home/jovyan/.ipython ; chgrp -R users /home/jovyan/.ipython; fc-cache -fsv
 
 USER jovyan
-ADD fonts/* /home/jovyan/.fonts/
+#ADD fonts/* /home/jovyan/.fonts/
 RUN fc-cache -fsv; fc-list
 
     

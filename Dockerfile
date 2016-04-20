@@ -38,8 +38,9 @@ RUN apt-get -y update && \
 ADD config/01-font.py /home/jovyan/.ipython/profile_default/startup/01-font.py
 
 ADD config/jupyter_notebook_config.py /home/jovyan/.jupyter/jupyter_notebook_config.py
-ADD config/base.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/
-#ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
+ADD config/article.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/
+#ADD config/base.tplx /opt/conda/lib/python3.5/site-packages/nbconvert/templates/latex/
+ADD config/ctex-xecjk-winfonts.def /usr/share/texlive/texmf-dist/tex/latex/ctex/fontset/ctex-xecjk-winfonts.def
 ADD config/ipython_kernel_config.py /home/jovyan/.ipython/profile_default/ipython_kernel_config.py
 ADD fonts/* /home/jovyan/.fonts/
 
@@ -47,7 +48,7 @@ RUN  chown -R jovyan /home/jovyan/.ipython ; chgrp -R users /home/jovyan/.ipytho
 
 USER jovyan
 #ADD fonts/* /home/jovyan/.fonts/
-RUN fc-cache -fsv; fc-list
+RUN fc-cache -fsv; fc-list|grep Fandol
 
     
 USER root

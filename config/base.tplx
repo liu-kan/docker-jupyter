@@ -34,9 +34,18 @@ This template does not define a docclass, the inheriting class must define this.
     \usepackage{booktabs}  % table support for pandoc > 1.12.2
     \usepackage{ulem} % ulem is needed to support strikethroughs (\sout)
 %\usepackage{xltxtra,fontspec,xunicode}
-\usepackage{xeCJK}
+\usepackage[T1]{fontenc}
+\usepackage{xltxtra}
+
+%\usepackage{xeCJK}
+\usepackage[boldfont,slantfont,CJKchecksingle]{xeCJK} % 允许斜体和粗体
 %\setmainfont{CMU Serif}
-\setCJKmainfont{WenQuanYi Zen Hei}
+%\setCJKmainfont[BoldFont=SimHei, ItalicFont=KaiTi]{SimSun}    %配置中文字体
+\setCJKmainfont[BoldFont=FandolHei, ItalicFont=FandolKai]{FandolSong}
+\setmainfont{Times New Roman}                % 英文衬线字体
+\setmonofont{Courier New}                    % 英文等宽字体
+\setsansfont{Droid Sans}                     % 英文无衬线字体
+
     ((* endblock packages *))
 
     ((* block definitions *))

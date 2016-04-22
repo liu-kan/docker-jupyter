@@ -6,6 +6,7 @@ c.InlineBackend.rc = {
     'font.family': 'FandolSong',
     'figure.figsize': (6.0, 4.0),
     'savefig.dpi': 80,
+    'axes.unicode_minus': False,
     'axes.titlesize': 12
 }
 

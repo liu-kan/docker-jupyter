@@ -29,8 +29,8 @@ RUN apt-get -y update && \
     apt-get install -y --no-install-recommends \
     openssh-server \
     libav-tools inkscape \
-    texlive-lang-chinese texlive-lang-cjk texlive-luatex texlive-math-extra texlive-metapost  texlive-plain-extra texlive-science texlive-xetex texlive-bibtex-extra \
-    latex-cjk-common fonts-lmodern fonts-wqy-microhei fonts-wqy-zenhei fonts-arphic-bkai00mp  fonts-arphic-gbsn00lp fonts-arphic-bsmi00lp fonts-arphic-ukai fonts-arphic-uming && \
+    texlive-lang-chinese texlive-lang-cjk texlive-math-extra texlive-metapost texlive-plain-extra texlive-science texlive-xetex texlive-bibtex-extra \
+    latex-cjk-common fonts-lmodern fonts-wqy-microhei fonts-wqy-zenhei && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

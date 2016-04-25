@@ -4,6 +4,7 @@ c.IPKernelApp.matplotlib = 'inline'
 c.InlineBackend.rc = {
     'font.size': 11,
     'font.family': 'FandolSong',
+    'axes.unicode_minus': False,
     'figure.figsize': (6.0, 4.0),
     'savefig.dpi': 80,
     'axes.titlesize': 12

@@ -1,0 +1,105 @@
+{% extends "page.html" %}
+
+{% block title %}{{page_title}}{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ static_url('components/codemirror/lib/codemirror.css') }}">
+<link rel="stylesheet" href="{{ static_url('components/codemirror/addon/dialog/dialog.css') }}">
+{{super()}}
+{% endblock %}
+
+{% block bodyclasses %}edit_app {{super()}}{% endblock %}
+
+{% block params %}
+data-base-url="{{base_url | urlencode}}"
+data-file-path="{{file_path}}"
+{{super()}}
+{% endblock %}
+
+{% block headercontainer %}
+
+<span id="save_widget" class="pull-left save_widget">
+    <span class="filename"></span>
+    <span class="last_modified"></span>
+</span>
+
+{% endblock %}
+
+{% block header %}
+
+<div id="menubar-container" class="container">
+  <div id="menubar">
+    <div id="menus" class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+          <p  class="navbar-text indicator_area">
+          <span id="current-mode" >当前模式</span>
+          </p>
+        <button type="button" class="btn btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <i class="fa fa-bars"></i>
+          <span class="navbar-text">菜单</span>
+        </button>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="notification_area"></li>
+        </ul>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">文件</a>
+              <ul id="file-menu" class="dropdown-menu">
+                <li id="new-file"><a href="#">新建</a></li>
+                <li id="save-file"><a href="#">保存</a></li>
+                <li id="rename-file"><a href="#">重命名</a></li>
+                <li id="download-file"><a href="#">下载</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">编辑</a>
+              <ul id="edit-menu" class="dropdown-menu">
+                <li id="menu-find"><a href="#">查找</a></li>
+                <li id="menu-replace"><a href="#">查找与替换</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">快捷键模式</li>
+                <li id="menu-keymap-default"><a href="#">默认<i class="fa"></i></a></li>
+                <li id="menu-keymap-sublime"><a href="#">Sublime Text<i class="fa"></i></a></li>
+                <li id="menu-keymap-vim"><a href="#">Vim<i class="fa"></i></a></li>
+                <li id="menu-keymap-emacs"><a href="#">emacs<i class="fa"></i></a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">视图</a>
+              <ul id="view-menu" class="dropdown-menu">
+              <li id="toggle_header" title="Show/Hide the logo and notebook title (above menu bar)">
+              <a href="#">切换是否显示页眉</a></li>
+              <li id="menu-line-numbers"><a href="#">切换是否显示行号</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">使用语言</a>
+              <ul id="mode-menu" class="dropdown-menu">
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="lower-header-bar"></div>
+
+{% endblock %}
+
+{% block site %}
+
+<div id="texteditor-backdrop">
+<div id="texteditor-container" class="container"></div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+    {{super()}}
+
+{% if ignore_minified_js %}
+    <script src="{{ static_url("edit/js/main.js") }}" type="text/javascript" charset="utf-8"></script>
+{% else %}
+    <script src="{{ static_url("edit/js/main.min.js") }}" type="text/javascript" charset="utf-8"></script>
+{% endif %}
+{% endblock %}

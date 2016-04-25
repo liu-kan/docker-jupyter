@@ -7,6 +7,7 @@ c.InlineBackend.rc = {
     'axes.unicode_minus': False,
     'figure.figsize': (6.0, 4.0),
     'savefig.dpi': 80,
+    'axes.unicode_minus': False,
     'axes.titlesize': 12
 }
 

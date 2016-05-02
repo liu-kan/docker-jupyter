@@ -3,7 +3,8 @@
 build:
 	#-docker rmi jupyter-kn
 	docker build --rm -t jupyter-kn .
-
+buildmysql:
+	docker build --rm -f ./Dockerfile.mysql -t mysql-utf8 .
 run: 
 	docker run -d --name jupyterServ -p 8000:8000 -p 8888:8888 -p 222:22 jupyter-kn
 rerun:
@@ -12,7 +13,7 @@ kill:
 	-docker kill jupyterServ
 	-docker rm jupyterServ
 mysql:
-	docker run -t --name mysql_1 -e MYSQL_ROOT_PASSWORD=wipm -v ~/mysql:/var/lib/mysql --publish 0.0.0.0:3306:3306 -d mysql
+	docker run -t --name mysql_1 -e MYSQL_ROOT_PASSWORD=wipm -v ~/mysql:/var/lib/mysql --publish 0.0.0.0:3306:3306 -d mysql-utf8
 enter:
 	docker exec -it jupyterServ sh -c "export TERM=xterm && bash"
 

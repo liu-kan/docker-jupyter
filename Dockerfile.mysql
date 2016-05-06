@@ -1,2 +1,2 @@
-FROM mysql
+FROM mysql:5.6
 ADD config/utf-8.cnf /etc/mysql/conf.d/

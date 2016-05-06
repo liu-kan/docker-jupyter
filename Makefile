@@ -13,7 +13,9 @@ kill:
 	-docker kill jupyterServ
 	-docker rm jupyterServ
 mysql:
-	docker run -t --name mysql_1 -e MYSQL_ROOT_PASSWORD=wipm -v ~/mysql:/var/lib/mysql --publish 0.0.0.0:3306:3306 -d mysql-utf8
+	-docker kill mysql_5_6
+	-docker rm mysql_5_6
+	docker run -t --name mysql_5_6 -e MYSQL_ROOT_PASSWORD=wipm -v ~/mysql:/var/lib/mysql --publish 0.0.0.0:3306:3306 -d mysql-utf8
 enter:
 	docker exec -it jupyterServ sh -c "export TERM=xterm && bash"
 

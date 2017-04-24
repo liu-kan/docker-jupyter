@@ -8,7 +8,7 @@ MAINTAINER Liu K <liukan@126.com>
 USER root
 
 # R pre-requisites
-RUN echo -e "deb http://mirrors.aliyun.com/debian jessie main contrib non-free\n\
+RUN echo "deb http://mirrors.aliyun.com/debian jessie main contrib non-free\n\
 deb-src http://mirrors.aliyun.com/debian jessie main contrib non-free\n\
 deb http://mirrors.aliyun.com/debian jessie-proposed-updates main contrib non-free\n\
 deb-src http://mirrors.aliyun.com/debian jessie-proposed-updates main contrib non-free\n\
